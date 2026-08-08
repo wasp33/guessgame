@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+tasks:
+  default:
+    desc: Run the Flask development server
+    cmds:
+      - uv run flask run
+    silent: false
+
+  install:
+    desc: Sync dependencies with uv
+    cmds:
+      - uv sync
+
+  run:
+    desc: Run the Flask development server
+    cmds:
+      - uv run flask run
