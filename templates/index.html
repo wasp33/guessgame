@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜數字遊戲</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="card">
+        <header>
+            <h1>猜數字遊戲</h1>
+            <p class="description">
+                電腦已經想好一個 1 到 100 之間的整數，猜猜看是多少吧！
+            </p>
+        </header>
+
+        {% if message %}
+        <p class="message message--{{ message_type }}">{{ message }}</p>
+        {% endif %}
+
+        <p class="guess-count">已猜次數：<strong>{{ guess_count }}</strong></p>
+
+        {% if not is_won %}
+        <form method="post" action="{{ url_for('guess') }}" class="guess-form">
+            <label for="guess">請輸入你的猜測（1-100）</label>
+            <input
+                type="number"
+                id="guess"
+                name="guess"
+                min="1"
+                max="100"
+                autofocus
+                required
+            >
+            <button type="submit">猜！</button>
+        </form>
+        {% else %}
+        <form method="post" action="{{ url_for('reset') }}" class="reset-form">
+            <button type="submit">再玩一次</button>
+        </form>
+        {% endif %}
+    </main>
+</body>
+</html>
